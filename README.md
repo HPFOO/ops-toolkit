@@ -19,7 +19,7 @@ A modular collection of production-hardened DevOps automation scripts, server bo
 Generates a self-signed fallback certificate (`unauthorized.local`, valid for 36,500 days) and registers it as Traefik's `defaultCertificate`. Scanners hitting raw IP on port 443 receive no domain information.
 
 ```bash
-curl -sSL [https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/coolify/deploy-dummy-cert.sh](https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/coolify/deploy-dummy-cert.sh) | bash
+curl -sSL https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/coolify/deploy-dummy-cert.sh | bash
 
 ```
 
@@ -37,7 +37,7 @@ Caps container logs at 3 files of 10MB each (`max-size: 10m`, `max-file: 3`) usi
 For standalone servers or nodes without internal Docker registries:
 
 ```bash
-curl -sSL [https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh](https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh) | bash
+curl -sSL https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh | bash
 
 ```
 
@@ -46,7 +46,7 @@ curl -sSL [https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-
 Pass the registry host/IP and port as the argument:
 
 ```bash
-curl -sSL [https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh](https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh) | bash -s -- "100.64.214.117:5000"
+curl -sSL https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh | bash -s -- "10.0.0.10:5000"
 
 ```
 
