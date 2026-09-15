@@ -20,3 +20,53 @@ Generates a self-signed fallback certificate (`unauthorized.local`, valid for 36
 
 ```bash
 curl -sSL [https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/coolify/deploy-dummy-cert.sh](https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/coolify/deploy-dummy-cert.sh) | bash
+
+```
+
+* **Target Machines**: Coolify Master node or any worker server exposing port `443` publicly.
+* **Idempotent**: Safe to re-run at any time to renew or verify the fallback certificate.
+
+---
+
+### 2. Docker Daemon Log Rotation & Storage Guard
+
+Caps container logs at 3 files of 10MB each (`max-size: 10m`, `max-file: 3`) using safe JSON merging via `jq`. Prevents unexpected root partition exhaustion.
+
+#### Standard Run (Log Limit Only)
+
+For standalone servers or nodes without internal Docker registries:
+
+```bash
+curl -sSL [https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh](https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh) | bash
+
+```
+
+#### Advanced Run (With Internal / Private Registry)
+
+Pass the registry host/IP and port as the argument:
+
+```bash
+curl -sSL [https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh](https://raw.githubusercontent.com/HPFOO/ops-toolkit/main/docker/init-daemon-limits.sh) | bash -s -- "100.64.214.117:5000"
+
+```
+
+---
+
+## 📂 Repository Layout
+
+```text
+ops-toolkit/
+├── README.md
+├── coolify/
+│   └── deploy-dummy-cert.sh
+└── docker/
+    └── init-daemon-limits.sh
+
+```
+
+---
+
+## 🔒 Security & Privacy
+
+* **Zero Hardcoded Secrets**: No credentials, private IP addresses, or internal domains are embedded in any script.
+* **Non-Destructive**: Merges with existing Docker configuration rather than overwriting the entire file.
